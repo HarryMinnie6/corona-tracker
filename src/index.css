@@ -25,7 +25,7 @@ body {
   justify-content: space-between;
 }
 .header__selectBox{
-  background-color: red;
+  background-color: #fffff2;
 }
 .statistics{
   display: flex;

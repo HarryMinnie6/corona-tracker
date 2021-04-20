@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent} from "@material-ui/core";
+import { Card, CardContent } from "@material-ui/core";
 import { FormControl, MenuItem, Select } from "@material-ui/core";
 
-import Table from "./components/Table/Table"
+import Table from "./components/Table/Table";
 import Map from "./components/Map/Map";
 import Infobox from "./components/InfoBoxes/InfoBox";
-import LineGraph from './components/LineGraph/LineGraph'
+import LineGraph from "./components/LineGraph/LineGraph";
 import { sortData } from "./utilities";
-import './App.css';
+import "./App.css";
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
-  const [tableData, setTableData] = useState([])
-  const [casesType, setCasesType] = useState("cases")
+  const [tableData, setTableData] = useState([]);
+  const [casesType, setCasesType] = useState("cases");
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
@@ -34,8 +34,8 @@ function App() {
             value: country.countryInfo.iso2 // abbreviations such as RSA, USA, UK etc
           }));
           //ordering countries by most number of cases
-          const sortedData = sortData(data)
-          setTableData(sortedData)
+          const sortedData = sortData(data);
+          setTableData(sortedData);
           setCountries(countries);
         });
     };
@@ -67,7 +67,7 @@ function App() {
       <div className="app__left">
         <div className="header">
           <h1>Covid-19 Tracker</h1>
-          <FormControl >
+          <FormControl>
             <Select
               className="header__selectBox"
               variant="outlined"
@@ -107,9 +107,9 @@ function App() {
         <Card>
           <CardContent>
             <h3>Live Cases By country</h3>
-            <Table countries = {tableData}/>
+            <Table countries={tableData} />
             <h3>World Wide New Cases</h3>
-            <LineGraph casesType={casesType}/>
+            <LineGraph casesType={casesType} />
           </CardContent>
         </Card>
       </div>

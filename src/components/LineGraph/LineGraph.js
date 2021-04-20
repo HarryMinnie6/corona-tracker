@@ -4,12 +4,12 @@ import numeral from "numeral";
 
 const options = {
   legend: {
-    display: false,
+    display: false
   },
   elements: {
     point: {
-      radius: 0,
-    },
+      radius: 0
+    }
   },
   maintainAspectRatio: false,
   tooltips: {
@@ -18,8 +18,8 @@ const options = {
     callbacks: {
       label: function (tooltipItem, data) {
         return numeral(tooltipItem.value).format("+0,0");
-      },
-    },
+      }
+    }
   },
   scales: {
     xAxes: [
@@ -27,24 +27,24 @@ const options = {
         type: "time",
         time: {
           format: "MM/DD/YY",
-          tooltipFormat: "ll",
-        },
-      },
+          tooltipFormat: "ll"
+        }
+      }
     ],
     yAxes: [
       {
         gridLines: {
-          display: false,
+          display: false
         },
         ticks: {
           // Include a dollar sign in the ticks
           callback: function (value, index, values) {
             return numeral(value).format("0a");
-          },
-        },
-      },
-    ],
-  },
+          }
+        }
+      }
+    ]
+  }
 };
 
 //
@@ -55,7 +55,7 @@ const buildChartData = (data, casesType) => {
     if (lastDataPoint) {
       let newDataPoint = {
         x: date,
-        y: data[casesType][date] - lastDataPoint,
+        y: data[casesType][date] - lastDataPoint
       };
       chartData.push(newDataPoint);
     }
@@ -64,7 +64,7 @@ const buildChartData = (data, casesType) => {
   return chartData;
 };
 
-function LineGraph({ casesType }) {
+function LineGraph({ casesType = "cases" }) {
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -86,6 +86,7 @@ function LineGraph({ casesType }) {
 
   return (
     <div>
+      {/* if their is no data from the useEffect fetch, it will return an undefined */}
       {data?.length > 0 && (
         <Line
           data={{
@@ -93,9 +94,9 @@ function LineGraph({ casesType }) {
               {
                 backgroundColor: "rgb(173,217,247, 0.5)",
                 borderColor: "#92CEF6",
-                data: data,
-              },
-            ],
+                data: data
+              }
+            ]
           }}
           options={options}
         />

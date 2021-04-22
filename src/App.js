@@ -7,6 +7,7 @@ import Map from "./components/Map/Map";
 import Infobox from "./components/InfoBoxes/InfoBox";
 import LineGraph from "./components/LineGraph/LineGraph";
 import { sortData } from "./utilities";
+import { lookNiceStats } from "./utilities";
 import "./App.css";
 
 function App() {
@@ -94,29 +95,47 @@ function App() {
         </div>
         <div className="statistics">
           <Infobox
+            active={casesType === "cases"}
+            onClick={(e) => setCasesType("cases")}
             title="CoronaVirus Cases"
-            cases={countryInfo.todayCases}
-            total={countryInfo.cases}
+            cases={lookNiceStats(countryInfo.todayCases)}
+            // regular stats --> will show actual numbers
+            // cases={countryInfo.todayCases}
+            total={lookNiceStats(countryInfo.cases)}
           />
           <Infobox
+            active={casesType === "recovered"}
+            onClick={(e) => setCasesType("recovered")}
             title="Recovered"
-            cases={countryInfo.todayRecovered}
-            total={countryInfo.recovered}
+            cases={lookNiceStats(countryInfo.todayRecovered)}
+            // regular stats --> will show actual numbers
+            // cases={countryInfo.todayRecovered}
+            total={lookNiceStats(countryInfo.recovered)}
           />
           <Infobox
+            active={casesType === "deaths"}
+            onClick={(e) => setCasesType("deaths")}
             title="Deaths"
-            cases={countryInfo.todayDeaths}
-            total={countryInfo.deaths}
+            cases={lookNiceStats(countryInfo.todayDeaths)}
+            // regular stats --> will show actual numbers
+            // cases={countryInfo.todayDeaths}
+
+            total={lookNiceStats(countryInfo.deaths)}
           />
         </div>
-        <Map center={mapCenter} zoom={mapZoom} countries={mapCountries} />
+        <Map
+          casesType={casesType}
+          center={mapCenter}
+          zoom={mapZoom}
+          countries={mapCountries}
+        />
       </div>
       <div className="app__right">
         <Card>
           <CardContent>
             <h3>Live Cases By country</h3>
             <Table countries={tableData} />
-            <h3>World Wide New Cases</h3>
+            <h3>World Wide New {casesType}</h3>
             <LineGraph casesType={casesType} />
           </CardContent>
         </Card>

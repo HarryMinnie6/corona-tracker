@@ -95,6 +95,7 @@ function App() {
         </div>
         <div className="statistics">
           <Infobox
+            isRed //used for Css styling
             active={casesType === "cases"}
             onClick={(e) => setCasesType("cases")}
             title="CoronaVirus Cases"
@@ -104,6 +105,7 @@ function App() {
             total={lookNiceStats(countryInfo.cases)}
           />
           <Infobox
+            isGreen
             active={casesType === "recovered"}
             onClick={(e) => setCasesType("recovered")}
             title="Recovered"
@@ -113,6 +115,7 @@ function App() {
             total={lookNiceStats(countryInfo.recovered)}
           />
           <Infobox
+            isBlack //used for Css styling
             active={casesType === "deaths"}
             onClick={(e) => setCasesType("deaths")}
             title="Deaths"
@@ -135,8 +138,8 @@ function App() {
           <CardContent>
             <h3>Live Cases By country</h3>
             <Table countries={tableData} />
-            <h3>World Wide New {casesType}</h3>
-            <LineGraph casesType={casesType} />
+            <h3 className="app__right-secondH3">World Wide New {casesType}</h3>
+            <LineGraph className="app__graph" casesType={casesType} />
           </CardContent>
         </Card>
       </div>

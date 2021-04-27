@@ -33,9 +33,9 @@ export const buildChartData = (data, casesType) => {
 };
 
 //used for the circle colors on map depending on case type (recovered, deaths, cases)
-const casesTypeColors = {
+export const casesTypeColors = {
   cases: {
-    hex: "#CC1034",
+    hex: "rgb(204,16,52)",
     multiplier: 300
   },
   recovered: {
@@ -43,8 +43,8 @@ const casesTypeColors = {
     multiplier: 300
   },
   deaths: {
-    hex: "#fb4443",
-    multiplier: 500
+    hex: "rgb(57,57,57)",
+    multiplier: 1000
   }
 };
 
@@ -86,5 +86,5 @@ export const showDataOnMap = (data, casesType = "cases") => {
 //making stats nice in the 3 info boxes
 
 export const lookNiceStats = (stat) => {
-  return stat ? `+${numeral(stat).format("0,0a")}` : "0+";
+  return stat ? `+${numeral(stat).format("0,0a")}` : "+0";
 };

@@ -44,7 +44,7 @@ export const casesTypeColors = {
   },
   deaths: {
     hex: "rgb(57,57,57)",
-    multiplier: 1000
+    multiplier: 1200
   }
 };
 

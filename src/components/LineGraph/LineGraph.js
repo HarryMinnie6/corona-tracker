@@ -1,6 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import numeral from "numeral";
+import showDataOnMap from "../../utilities";
+
+const casesTypeColors = {
+  cases: {
+    hex: "rgb(204,16,52)",
+    fill: "rgb(204,16,52, 0.5)",
+    multiplier: 300
+  },
+  recovered: {
+    hex: "#7dd71d",
+    fill: "rgb(125,215,29, 0.5)",
+    multiplier: 300
+  },
+  deaths: {
+    hex: "rgb(57,57,57)",
+    fill: "rgb(57,57,57, 0.5)",
+    multiplier: 700
+  }
+};
 
 const options = {
   legend: {
@@ -64,7 +83,7 @@ const buildChartData = (data, casesType) => {
   return chartData;
 };
 
-function LineGraph({ casesType = "cases" }) {
+function LineGraph({ casesType = "cases", ...props }) {
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -85,15 +104,16 @@ function LineGraph({ casesType = "cases" }) {
   }, [casesType]);
 
   return (
-    <div>
+    <div className={props.className}>
       {/* if their is no data from the useEffect fetch, it will return an undefined */}
       {data?.length > 0 && (
         <Line
+          className="lineGraph"
           data={{
             datasets: [
               {
-                backgroundColor: "rgb(173,217,247, 0.5)",
-                borderColor: "#92CEF6",
+                backgroundColor: `${casesTypeColors[casesType].fill}`,
+                borderColor: `${casesTypeColors[casesType].hex}`,
                 data: data
               }
             ]
